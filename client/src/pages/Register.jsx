@@ -17,7 +17,7 @@ const Register = () => {
         password,
       });
       localStorage.setItem("token", res.data.token);
-      navigate("/dashboard");
+      navigate("/home");
     } catch (err) {
       alert("Registration failed: " + (err.response?.data?.error || "Something went wrong"));
     }

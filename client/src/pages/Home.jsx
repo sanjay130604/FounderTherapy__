@@ -47,18 +47,7 @@ const Home = () => {
           >
             Start Journaling as Guest
           </button>
-          <Link
-            to="/"
-            className="px-5 py-2 border rounded transform transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 hover:bg-blue-100"
-          >
-            Login
-          </Link>
-          <Link
-            to="/register"
-            className="px-5 py-2 border rounded transform transition-all duration-300 ease-in-out hover:scale-105 active:scale-95 hover:bg-blue-100"
-          >
-            Signup
-          </Link>
+          
         </div>
 
         {/* WHY SECTION */}

@@ -18,11 +18,11 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div  className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-3xl mx-auto">
         <Navbar />
 
-        <div className="bg-white shadow-md rounded-lg p-6 mb-6">
+        <div className="bg-white shadow-md rounded-lg p-6 mb-6 ">
           <h2 className="text-2xl font-semibold mb-2">Your Journal</h2>
           <p className="text-sm text-gray-500 mb-4">
             Take a moment to reflect on your thoughts and feelings.
@@ -57,7 +57,7 @@ const Dashboard = () => {
               onClick={handleAnalyze}
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded animate-bounce-slow"
             >
-              📤 Submit Entry
+               Submit Entry
             </button>
             <button className="bg-gray-200 text-gray-700 px-4 py-2 rounded">
               Save Draft
