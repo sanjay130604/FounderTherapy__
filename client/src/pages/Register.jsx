@@ -1,25 +1,40 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  // ✅ Use environment variable
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", {
+      const res = await axios.post(`${API_URL}/api/auth/register`, {
         name,
         email,
         password,
       });
+
+      // Save token in localStorage
       localStorage.setItem("token", res.data.token);
+
+      // Redirect to home
       navigate("/home");
     } catch (err) {
-      alert("Registration failed: " + (err.response?.data?.error || "Something went wrong"));
+      alert(
+        "Registration failed: " +
+          (err.response?.data?.error || err.message || "Something went wrong")
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -58,19 +73,23 @@ const Register = () => {
           className="w-full p-3 border rounded focus:outline-none focus:ring focus:ring-blue-300"
         />
 
-        {/* ✨ Hover effect only, no loop */}
         <button
           type="submit"
-          className="w-full bg-green-600 text-white p-3 rounded-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-md"
+          disabled={loading}
+          className={`w-full p-3 rounded-lg text-white transform transition-transform duration-300 ${
+            loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-green-600 hover:scale-105 hover:shadow-md"
+          }`}
         >
-          Register
+          {loading ? "Registering..." : "Register"}
         </button>
 
         <p className="text-center text-sm text-gray-600">
           Already have an account?{" "}
-          <a href="/" className="text-blue-500 hover:underline">
+          <Link to="/" className="text-blue-500 hover:underline">
             Login
-          </a>
+          </Link>
         </p>
       </form>
     </div>
