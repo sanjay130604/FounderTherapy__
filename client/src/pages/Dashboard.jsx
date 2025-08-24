@@ -7,15 +7,19 @@ const Dashboard = () => {
   const [prompt, setPrompt] = useState("");
   const [moodResult, setMoodResult] = useState("");
 
-  const handlePrompt = async () => {
-    const res = await axios.post("http://localhost:5000/api/openai/generate-prompt");
-    setPrompt(res.data.prompt);
-  };
+// ✅ Use env instead of hardcoded localhost
+const API_URL = "https://foundertherapy.onrender.com";
 
-  const handleAnalyze = async () => {
-    const res = await axios.post("http://localhost:5000/api/openai/analyze-mood", { content: entry });
-    setMoodResult(res.data.moodAndSolution);
-  };
+const handlePrompt = async () => {
+  const res = await axios.post(`${API_URL}/api/openai/generate-prompt`);
+  setPrompt(res.data.prompt);
+};
+
+const handleAnalyze = async () => {
+  const res = await axios.post(`${API_URL}/api/openai/analyze-mood`, { content: entry });
+  setMoodResult(res.data.moodAndSolution);
+};
+
 
   return (
     <div  className="min-h-screen bg-gray-50 p-6">

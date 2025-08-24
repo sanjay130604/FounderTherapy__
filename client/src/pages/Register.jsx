@@ -9,26 +9,34 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // ✅ Use environment variable
-  const API_URL = process.env.REACT_APP_API_URL;
+  // ✅ Use environment variable with fallback (important for dev/prod)
+// ✅ Always fallback for local dev
+const API_URL = "https://foundertherapy.onrender.com";
+
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
+
+      console.log(`${API_URL}/api/auth/register`);
+
       const res = await axios.post(`${API_URL}/api/auth/register`, {
         name,
         email,
         password,
       });
 
-      // Save token in localStorage
-      localStorage.setItem("token", res.data.token);
+      // ✅ Save token if backend sends it
+      if (res.data?.token) {
+        localStorage.setItem("token", res.data.token);
+      }
 
-      // Redirect to home
+      // ✅ Redirect to home
       navigate("/home");
     } catch (err) {
+      console.error(err);
       alert(
         "Registration failed: " +
           (err.response?.data?.error || err.message || "Something went wrong")
@@ -44,7 +52,9 @@ const Register = () => {
         onSubmit={handleRegister}
         className="bg-white p-8 rounded-xl shadow-lg space-y-4 w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold text-center text-gray-800">Register</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-800">
+          Register
+        </h2>
 
         <input
           type="text"

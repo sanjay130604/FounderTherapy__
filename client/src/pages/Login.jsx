@@ -1,24 +1,39 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  // ✅ Use environment variable
+const API_URL = "https://foundertherapy.onrender.com";;
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post(`${API_URL}/api/auth/login`, {
         email,
         password,
       });
+
+      // Save token
       localStorage.setItem("token", res.data.token);
-      // ✅ Navigate to home page after login
-      navigate("/Home");
+
+      // ✅ Navigate to home
+      navigate("/home");
     } catch (err) {
-      alert("Login failed: " + (err.response?.data?.error || "Something went wrong."));
+      alert(
+        "Login failed: " +
+          (err.response?.data?.error || err.message || "Something went wrong.")
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -50,16 +65,21 @@ const Login = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white p-3 rounded-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-md"
+          disabled={loading}
+          className={`w-full p-3 rounded-lg text-white transform transition-transform duration-300 ${
+            loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-blue-600 hover:scale-105 hover:shadow-md"
+          }`}
         >
-          Login
+          {loading ? "Logging in..." : "Login"}
         </button>
 
         <p className="text-center text-sm text-gray-600">
           Don’t have an account?{" "}
-          <a href="/register" className="text-blue-500 hover:underline">
+          <Link to="/register" className="text-blue-500 hover:underline">
             Register
-          </a>
+          </Link>
         </p>
       </form>
     </div>
