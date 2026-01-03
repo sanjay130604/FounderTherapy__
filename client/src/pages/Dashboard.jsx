@@ -129,8 +129,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 
-// const API_URL = "https://foundertherapy.onrender.com";
-const API_URL = "http://localhost:5000";
+const API_URL = "https://foundertherapy.onrender.com";
+// const API_URL = "http://localhost:5000";
 
 const Dashboard = () => {
   const [entry, setEntry] = useState("");
