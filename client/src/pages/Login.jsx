@@ -9,8 +9,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   // ✅ Use environment variable
-// const API_URL = "https://foundertherapy.onrender.com";
-const API_URL = "http://localhost:5000";
+const API_URL = "https://foundertherapy.onrender.com";
+//const API_URL = "http://localhost:5000";
 
   const handleLogin = async (e) => {
     e.preventDefault();
