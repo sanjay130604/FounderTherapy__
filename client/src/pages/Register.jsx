@@ -11,8 +11,8 @@ const Register = () => {
 
   // ✅ Use environment variable with fallback (important for dev/prod)
 // ✅ Always fallback for local dev
-// const API_URL = "https://foundertherapy.onrender.com";
-const API_URL = "http://localhost:5000";
+const API_URL = "https://foundertherapy.onrender.com";
+//const API_URL = "http://localhost:5000";
 
   const handleRegister = async (e) => {
     e.preventDefault();
