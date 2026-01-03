@@ -9,8 +9,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   // ✅ Use environment variable
-const API_URL = "https://foundertherapy.onrender.com";;
-
+// const API_URL = "https://foundertherapy.onrender.com";
+const API_URL = "http://localhost:5000";
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -58,6 +58,7 @@ const API_URL = "https://foundertherapy.onrender.com";;
           className="w-full p-3 border rounded focus:outline-none focus:ring focus:ring-blue-300"
           type="password"
           placeholder="Password"
+          autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
